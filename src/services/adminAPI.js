@@ -42,6 +42,11 @@ async function createMission(data) {
   return response.data;
 }
 
+async function deleteMission(id) {
+  const response = await axoisBase.delete(`${endpoint}/mission/${id}`);
+  return response.data;
+}
+
 export {
   login,
   me,
@@ -51,4 +56,5 @@ export {
   updateRandomConfig,
   getMissions,
   createMission,
+  deleteMission,
 };

@@ -1,17 +1,15 @@
 import { useMutation } from "@tanstack/react-query";
-import { createMission } from "../services/adminAPI";
+import { deleteMission } from "../services/adminAPI";
 import { toast } from "react-toastify";
 import { useQueryClient } from "@tanstack/react-query";
 
-export default function useCreateMission() {
+export default function useDeleteMission() {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: createMission,
+    mutationFn: deleteMission,
     onSuccess: () => {
-      toast.success(
-        "Tạo nhiệm vụ thành công, nhiệm vụ mới sẽ được đồng bộ vào ngày tiếp theo của sự kiện !!!"
-      );
+      toast.success("Xóa nhiệm vụ thành công");
       queryClient.invalidateQueries({ queryKey: ["missions"] });
     },
     onError: (error) => {

@@ -23,13 +23,13 @@ function CreateForm({ closeModal }) {
 
   return (
     <Form className="!mt-8" onFinish={handleFinish} layout="vertical">
-      <Form.Item
+      {/* <Form.Item
         label="Tên nhiệm vụ"
         name="missionContentTemplete"
         rules={[{ required: true }]}
       >
         <Input />
-      </Form.Item>
+      </Form.Item> */}
       <Form.Item
         label="Mục tiêu nhiệm vụ"
         name="missionGoal"

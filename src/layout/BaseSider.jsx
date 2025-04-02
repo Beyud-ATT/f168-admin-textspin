@@ -1,5 +1,5 @@
 import { Menu, Typography } from "antd";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
 import { IoChatbubbleOutline } from "react-icons/io5";
 import { Link, useLocation } from "react-router";
@@ -41,8 +41,12 @@ export default function BaseSider({ Layout, ...rest }) {
   const [collapsed, setCollapsed] = useState(false);
   const pathname = useLocation().pathname;
   const [current, setCurrent] = useState(
-    pathname === "/" ? "home" : pathname.replace("/", "")
+    pathname === "/" ? "comments" : pathname.replace("/", "")
   );
+
+  useEffect(() => {
+    setCurrent(pathname.replace("/", ""));
+  }, [pathname]);
 
   const toggleCollapse = () => {
     setCollapsed((state) => !state);
@@ -82,7 +86,7 @@ export default function BaseSider({ Layout, ...rest }) {
       <Menu
         theme="dark"
         mode="inline"
-        defaultSelectedKeys={[pathname]}
+        defaultSelectedKeys={[pathname.replace("/", "")]}
         selectedKeys={[current]}
         onClick={({ key }) => setCurrent(key)}
         items={items}

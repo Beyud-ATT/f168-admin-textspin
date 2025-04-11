@@ -1,21 +1,23 @@
 import { useQuery } from "@tanstack/react-query";
-import { comments } from "../services/adminAPI";
+import { getUsers } from "../services/adminAPI";
 import { toast } from "react-toastify";
 import { useSearchParams } from "react-router";
 
-export default function useComments(params) {
+export default function useUsersGet() {
   const [searchParams] = useSearchParams();
 
+  const page = searchParams.get("page");
+  const pageSize = searchParams.get("pageSize");
   const textSearch = searchParams.get("textSearch");
 
   const { data, isLoading, error, isError } = useQuery({
-    queryKey: ["comments", params, textSearch],
-    queryFn: () => comments(params),
+    queryKey: ["users", page, pageSize, textSearch],
+    queryFn: () => getUsers({ pageIndex: page, pageSize, textSearch }),
   });
 
   if (isError) {
     toast.error(error.response.data.message);
   }
 
-  return { comments: data, isLoading };
+  return { users: data, isLoading };
 }

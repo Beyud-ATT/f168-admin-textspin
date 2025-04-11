@@ -6,11 +6,16 @@ import { IoIosCloseCircleOutline } from "react-icons/io";
 import useProcessComment from "../../hooks/useProcessComment";
 import { CommentStatus } from "../../utils/constant";
 import { useQueryClient } from "@tanstack/react-query";
+import TextSearch from "../../components/TextSearch";
 
 export default function Comments() {
   const queryClient = useQueryClient();
   const [page, setPage] = useState(1);
-  const params = useMemo(() => ({ pageIndex: page, pageSize: 20 }), [page]);
+  const [pageSize, setPageSize] = useState(20);
+  const params = useMemo(
+    () => ({ pageIndex: page, pageSize }),
+    [page, pageSize]
+  );
   const { comments, isLoading } = useComments(params);
   const { mutate: processComment } = useProcessComment();
 
@@ -91,18 +96,23 @@ export default function Comments() {
         },
       },
     ],
-    [params, processComment, queryClient, handleChangeStatus]
+    [handleChangeStatus]
   );
 
   return (
     <div className="w-[50%] mx-auto">
+      <TextSearch />
       <Table
         columns={columns}
         dataSource={comments?.data}
         pagination={{
           ...comments?.pagination,
           current: page,
-          onChange: setPage,
+          onChange: (page, pageSize) => {
+            setPage(page), setPageSize(pageSize);
+          },
+          showSizeChanger: true,
+          pageSizeOptions: ["10", "20", "50", "100"],
         }}
         scroll={{ y: 700 }}
         loading={isLoading}

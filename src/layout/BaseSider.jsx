@@ -4,10 +4,20 @@ import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
 import { IoChatbubbleOutline } from "react-icons/io5";
 import { Link, useLocation } from "react-router";
 import { FaGear, FaGem } from "react-icons/fa6";
+import { FaUserNinja } from "react-icons/fa";
 
 const itemStyle = "font-bold text-[14px]";
 
 const items = [
+  {
+    key: "users",
+    icon: <FaUserNinja className="font-bold !text-lg" />,
+    label: (
+      <Link to="/users" className={itemStyle}>
+        Người dùng
+      </Link>
+    ),
+  },
   {
     key: "comments",
     icon: <IoChatbubbleOutline className="!text-lg" strokeWidth={3} />,
@@ -41,7 +51,7 @@ export default function BaseSider({ Layout, ...rest }) {
   const [collapsed, setCollapsed] = useState(false);
   const pathname = useLocation().pathname;
   const [current, setCurrent] = useState(
-    pathname === "/" ? "comments" : pathname.replace("/", "")
+    pathname === "/" ? "users" : pathname.replace("/", "")
   );
 
   useEffect(() => {

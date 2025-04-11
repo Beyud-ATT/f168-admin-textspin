@@ -6,6 +6,7 @@ import { ToastContainer } from "react-toastify";
 import Comments from "./pages/comments/Index";
 import RandomConfig from "./pages/random-config/Index";
 import Missions from "./pages/missions/Index";
+import Users from "./pages/users/Index";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path="/comments" element={<Comments />} />
           <Route path="/random-config" element={<RandomConfig />} />
           <Route path="/missions" element={<Missions />} />
+          <Route path="/users" element={<Users />} />
         </Route>
         <Route path="/login" element={<Login />}></Route>
       </Routes>

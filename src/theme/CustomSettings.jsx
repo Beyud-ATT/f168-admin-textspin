@@ -34,6 +34,9 @@ export default function ThemeCustomSettings({ children }) {
             headerColor: "white",
             headerBg: "var(--color-brand-primary)",
           },
+          Pagination: {
+            itemActiveBg: "var(--table-body-background)",
+          },
         },
       }}
     >

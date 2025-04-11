@@ -22,7 +22,7 @@ function AuthProvider({ children }) {
     if (!isAuthenticated) {
       navigate("/login");
     } else {
-      navigate("/comments");
+      navigate("/users");
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isAuthenticated]);

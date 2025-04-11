@@ -47,6 +47,16 @@ async function deleteMission(id) {
   return response.data;
 }
 
+async function getUsers(params) {
+  const response = await axoisBase.get(`${endpoint}/users`, { params });
+  return response.data;
+}
+
+async function getUsersCode(userId) {
+  const response = await axoisBase.get(`${endpoint}/user-codes/${userId}`);
+  return response.data;
+}
+
 export {
   login,
   me,
@@ -57,4 +67,6 @@ export {
   getMissions,
   createMission,
   deleteMission,
+  getUsers,
+  getUsersCode,
 };

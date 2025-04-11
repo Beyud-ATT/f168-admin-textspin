@@ -93,6 +93,16 @@
     scrollbar-color: unset;
   }
 
+  .ant-pagination-item-link {
+    color: var(--color-brand-primary) !important;
+  }
+
+  .ant-pagination-item-active,
+  .ant-pagination-item-active > a {
+    border-color: var(--color-brand-primary) !important;
+    color: var(--color-brand-primary) !important;
+  }
+
   /* For Webkit browsers (Chrome, Safari, etc) */
   ::-webkit-scrollbar {
     width: 5px;

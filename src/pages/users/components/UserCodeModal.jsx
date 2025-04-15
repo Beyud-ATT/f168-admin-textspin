@@ -4,6 +4,7 @@ import { useMemo } from "react";
 import useUsersGetCode from "../../../hooks/useUsersGetCode";
 import { MdOutlineQrCodeScanner } from "react-icons/md";
 import { IoClose } from "react-icons/io5";
+import dayjs from "dayjs";
 
 function UserCodeTable({ record }) {
   const { id } = record;
@@ -15,6 +16,14 @@ function UserCodeTable({ record }) {
         title: "Mã quay thưởng",
         dataIndex: "code",
         key: "code",
+      },
+      {
+        title: "Thời gian tạo mã",
+        dataIndex: "createdAt",
+        key: "createdAt",
+        render: () => {
+          return dayjs().format("DD/MM/YYYY HH:mm:ss");
+        },
       },
     ];
   }, []);

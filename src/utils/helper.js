@@ -1,4 +1,3 @@
-import dayjs from "dayjs";
 import * as XLSX from "xlsx";
 
 function logoutHelper() {
@@ -9,13 +8,27 @@ function logoutHelper() {
   localStorage.removeItem("userType");
 }
 
-const downloadExcel = ({ header, data, fileName, hidden = true }) => {
+const downloadExcel = ({ data, fileName = "Bảng thống kê" }) => {
   const excelData = [
-    [...header],
+    [
+      "Tên đăng nhập",
+      "Lượt đã nhận",
+      "Lượt đã gửi",
+      "Mã quay thưởng",
+      "Chữ F",
+      "Số 1",
+      "Số 6",
+      "Số 8",
+    ],
     ...data.map((item) => [
-      item.displayName,
-      !hidden ? item.message : item.hiddenMessage,
-      dayjs(item.createdAt).format("YYYY-MM-DD HH:mm"),
+      item.username,
+      item.useTurn,
+      item.sendTurn,
+      item.codes.join(", "),
+      item.words?.find((word) => word.wordText === "F")?.count,
+      item.words?.find((word) => word.wordText === "1")?.count,
+      item.words?.find((word) => word.wordText === "6")?.count,
+      item.words?.find((word) => word.wordText === "8")?.count,
     ]),
   ];
 
@@ -25,4 +38,5 @@ const downloadExcel = ({ header, data, fileName, hidden = true }) => {
 
   XLSX.writeFile(wb, `${fileName || "download"}.xlsx`);
 };
+
 export { logoutHelper, downloadExcel };

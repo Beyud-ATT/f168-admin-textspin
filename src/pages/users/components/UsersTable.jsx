@@ -6,6 +6,7 @@ import UserCodeModal from "./UserCodeModal";
 import { useSearchParams } from "react-router";
 import TextSearch from "../../../components/TextSearch";
 import UserWordModal from "./UserWordModal";
+import ExportExcel from "../../../components/ExportXLSX";
 
 export default function UsersTable() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -48,7 +49,7 @@ export default function UsersTable() {
         dataIndex: "createdAt",
         key: "createdAt",
         align: "center",
-        render: (text) => dayjs(text).format("DD/MM/YYYY HH:mm:ss"),
+        render: (createdAt) => dayjs(createdAt).format("DD/MM/YYYY HH:mm:ss"),
       },
       {
         title: "Hành động",
@@ -67,7 +68,10 @@ export default function UsersTable() {
 
   return (
     <div>
-      <TextSearch />
+      <Flex justify="space-between" align="center" gap={10} className="!my-4">
+        <TextSearch />
+        <ExportExcel />
+      </Flex>
       <Table
         columns={columns}
         dataSource={users?.data}

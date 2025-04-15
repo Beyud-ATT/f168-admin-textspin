@@ -12,8 +12,13 @@ export default function TextSearch() {
   }
 
   return (
-    <Form form={form} onFinish={handleFinish} layout="vertical">
-      <Form.Item name="textSearch">
+    <Form
+      form={form}
+      onFinish={handleFinish}
+      layout="vertical"
+      className="w-[50%]"
+    >
+      <Form.Item name="textSearch" className="!m-0">
         <Input
           placeholder="Tìm kiếm"
           prefix={<FaSearch className="text-[var(--color-brand-primary)]" />}

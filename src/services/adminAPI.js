@@ -57,6 +57,11 @@ async function getUsersCode(userId) {
   return response.data;
 }
 
+async function getStaticUsers() {
+  const response = await axoisBase.get(`${endpoint}/static-users`);
+  return response.data;
+}
+
 export {
   login,
   me,
@@ -69,4 +74,5 @@ export {
   deleteMission,
   getUsers,
   getUsersCode,
+  getStaticUsers,
 };

@@ -5,35 +5,22 @@ import { FaRegCheckCircle } from "react-icons/fa";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import useProcessComment from "../../hooks/useProcessComment";
 import { CommentStatus } from "../../utils/constant";
-import { useQueryClient } from "@tanstack/react-query";
 import TextSearch from "../../components/TextSearch";
+import { useSearchParams } from "react-router";
 
 export default function Comments() {
-  const queryClient = useQueryClient();
-  const [page, setPage] = useState(1);
-  const [pageSize, setPageSize] = useState(20);
-  const params = useMemo(
-    () => ({ pageIndex: page, pageSize }),
-    [page, pageSize]
-  );
-  const { comments, isLoading } = useComments(params);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const { comments, isLoading } = useComments();
   const { mutate: processComment } = useProcessComment();
 
   const handleChangeStatus = useCallback(
     (record, status) => {
-      processComment(
-        {
-          commentId: record.id,
-          approvalStatus: status,
-        },
-        {
-          onSuccess: () => {
-            queryClient.invalidateQueries(["comments", params]);
-          },
-        }
-      );
+      processComment({
+        commentId: record.id,
+        approvalStatus: status,
+      });
     },
-    [processComment, queryClient, params]
+    [processComment]
   );
 
   const columns = useMemo(
@@ -106,15 +93,18 @@ export default function Comments() {
         columns={columns}
         dataSource={comments?.data}
         pagination={{
+          current: searchParams.get("page") || 1,
+          pageSize: searchParams.get("pageSize") || 20,
           ...comments?.pagination,
-          current: page,
           onChange: (page, pageSize) => {
-            setPage(page), setPageSize(pageSize);
+            searchParams.set("page", page);
+            searchParams.set("pageSize", pageSize);
+            setSearchParams(searchParams);
           },
           showSizeChanger: true,
-          pageSizeOptions: ["10", "20", "50", "100"],
+          pageSizeOptions: ["20", "50", "100"],
         }}
-        scroll={{ y: 700 }}
+        scroll={{ y: 670 }}
         loading={isLoading}
       />
     </div>

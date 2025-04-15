@@ -21,8 +21,6 @@ function AuthProvider({ children }) {
   useEffect(() => {
     if (!isAuthenticated) {
       navigate("/login");
-    } else {
-      navigate("/users");
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isAuthenticated]);
@@ -43,7 +41,7 @@ function AuthProvider({ children }) {
       const { token } = res.data;
       localStorage.setItem("token", token);
       setIsAuthenticated(true);
-      navigate("/");
+      navigate("/users");
       if (res.message) {
         toast.success(res.message);
       }

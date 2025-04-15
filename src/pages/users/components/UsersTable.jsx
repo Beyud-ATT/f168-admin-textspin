@@ -1,16 +1,14 @@
 import { Flex, Table } from "antd";
 import dayjs from "dayjs";
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 import useUsersGet from "../../../hooks/useUsersGet";
 import UserCodeModal from "./UserCodeModal";
 import { useSearchParams } from "react-router";
 import TextSearch from "../../../components/TextSearch";
 
 export default function UsersTable() {
-  const { users, isLoading } = useUsersGet();
   const [searchParams, setSearchParams] = useSearchParams();
-  const [page, setPage] = useState(searchParams.get("page") || 1);
-  const [pageSize, setPageSize] = useState(searchParams.get("pageSize") || 10);
+  const { users, isLoading } = useUsersGet();
 
   const columns = useMemo(() => {
     return [
@@ -68,18 +66,19 @@ export default function UsersTable() {
         columns={columns}
         dataSource={users?.data}
         pagination={{
-          current: page,
-          pageSize,
+          current: searchParams.get("page") || 1,
+          pageSize: searchParams.get("pageSize") || 20,
+          ...users?.pagination,
           showSizeChanger: true,
-          pageSizeOptions: ["10", "20", "50", "100"],
+          pageSizeOptions: ["20", "50", "100"],
           onChange: (page, pageSize) => {
-            setPage(page);
-            setPageSize(pageSize);
-            searchParams.set("page", page);
-            searchParams.set("pageSize", pageSize);
-            setSearchParams(searchParams);
+            const newSearchParams = new URLSearchParams(searchParams);
+            newSearchParams.set("page", page);
+            newSearchParams.set("pageSize", pageSize);
+            setSearchParams(newSearchParams);
           },
         }}
+        scroll={{ y: 670 }}
         loading={isLoading}
       />
     </div>

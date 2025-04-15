@@ -1,5 +1,5 @@
 import { CompoundModal } from "../../../components/CompoundModal";
-import { Table } from "antd";
+import { Table, Typography } from "antd";
 import { useMemo } from "react";
 import useUsersGetCode from "../../../hooks/useUsersGetCode";
 import { MdOutlineQrCodeScanner } from "react-icons/md";
@@ -20,12 +20,15 @@ function UserCodeTable({ record }) {
   }, []);
 
   return (
-    <Table
-      columns={columns}
-      dataSource={usersCode?.data}
-      loading={isLoading}
-      pagination={false}
-    />
+    <>
+      <Typography.Title level={3}>Mã Quay Thưởng</Typography.Title>
+      <Table
+        columns={columns}
+        dataSource={usersCode?.data}
+        loading={isLoading}
+        pagination={false}
+      />
+    </>
   );
 }
 

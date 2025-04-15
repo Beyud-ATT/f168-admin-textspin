@@ -5,6 +5,7 @@ import useUsersGet from "../../../hooks/useUsersGet";
 import UserCodeModal from "./UserCodeModal";
 import { useSearchParams } from "react-router";
 import TextSearch from "../../../components/TextSearch";
+import UserWordModal from "./UserWordModal";
 
 export default function UsersTable() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -54,7 +55,12 @@ export default function UsersTable() {
         key: "action",
         dataIndex: "action",
         align: "center",
-        render: (_, record) => <UserCodeModal record={record} />,
+        render: (_, record) => (
+          <Flex align="center" justify="center" gap={10}>
+            <UserCodeModal record={record} />
+            <UserWordModal record={record} />
+          </Flex>
+        ),
       },
     ];
   }, []);

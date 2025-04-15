@@ -68,7 +68,7 @@ export default function UsersTable() {
 
   return (
     <div>
-      <Flex justify="space-between" align="center" gap={10} className="!my-4">
+      <Flex justify="space-between" align="center" gap={10}>
         <TextSearch />
         <ExportExcel />
       </Flex>

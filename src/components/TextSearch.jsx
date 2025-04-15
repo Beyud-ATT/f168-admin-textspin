@@ -16,7 +16,7 @@ export default function TextSearch() {
       form={form}
       onFinish={handleFinish}
       layout="vertical"
-      className="w-[50%]"
+      className="w-[50%] !my-5"
     >
       <Form.Item name="textSearch" className="!m-0">
         <Input

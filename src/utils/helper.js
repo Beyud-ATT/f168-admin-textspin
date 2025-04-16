@@ -1,3 +1,4 @@
+import dayjs from "dayjs";
 import * as XLSX from "xlsx";
 
 function logoutHelper() {
@@ -19,6 +20,7 @@ const downloadExcel = ({ data, fileName = "Bảng thống kê" }) => {
       "Số 1",
       "Số 6",
       "Số 8",
+      "Lần rút chữ gần nhất",
     ],
     ...data.map((item) => [
       item.username,
@@ -29,6 +31,9 @@ const downloadExcel = ({ data, fileName = "Bảng thống kê" }) => {
       item.words?.find((word) => word.wordText === "1")?.count,
       item.words?.find((word) => word.wordText === "6")?.count,
       item.words?.find((word) => word.wordText === "8")?.count,
+      item.lastWordTime
+        ? dayjs(item.lastWordTime).format("MM/DD/YYYY HH:mm:ss")
+        : "",
     ]),
   ];
 

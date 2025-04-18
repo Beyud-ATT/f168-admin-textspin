@@ -8,6 +8,7 @@ export default function TextSearch() {
 
   function handleFinish(values) {
     searchParams.set("textSearch", values.textSearch);
+    searchParams.set("page", 1);
     setSearchParams(searchParams);
   }
 

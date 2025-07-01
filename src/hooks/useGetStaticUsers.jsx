@@ -6,6 +6,7 @@ export default function useGetStaticUsers() {
   const { data, isLoading, isError, error } = useQuery({
     queryKey: ["static-users"],
     queryFn: getStaticUsers,
+    enabled: false,
   });
 
   if (isError) {

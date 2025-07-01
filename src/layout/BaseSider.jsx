@@ -36,15 +36,15 @@ const items = [
       </Link>
     ),
   },
-  {
-    key: "missions",
-    icon: <FaGem className="font-bold !text-lg" />,
-    label: (
-      <Link to="/missions" className={itemStyle}>
-        Nhiệm vụ
-      </Link>
-    ),
-  },
+  // {
+  //   key: "missions",
+  //   icon: <FaGem className="font-bold !text-lg" />,
+  //   label: (
+  //     <Link to="/missions" className={itemStyle}>
+  //       Nhiệm vụ
+  //     </Link>
+  //   ),
+  // },
 ];
 
 export default function BaseSider({ Layout, ...rest }) {

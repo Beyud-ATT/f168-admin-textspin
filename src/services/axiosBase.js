@@ -1,11 +1,11 @@
 import axios from "axios";
 import { logoutHelper } from "../utils/helper";
 
-const axoisBase = axios.create({
+const axiosBase = axios.create({
   baseURL: import.meta.env.VITE_API_URL,
 });
 
-axoisBase.interceptors.request.use(
+axiosBase.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem("token");
     if (token) {
@@ -18,7 +18,7 @@ axoisBase.interceptors.request.use(
   }
 );
 
-axoisBase.interceptors.response.use(
+axiosBase.interceptors.response.use(
   (response) => {
     return response;
   },
@@ -33,4 +33,4 @@ axoisBase.interceptors.response.use(
   }
 );
 
-export default axoisBase;
+export default axiosBase;
